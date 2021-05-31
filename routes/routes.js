@@ -1,23 +1,8 @@
+let db = require('../utils/database');
 let express = require('express');
 let router = express.Router();
 
-const { MongoClient } = require("mongodb");
-
-const uri = process.env.MONGODB_URI;
-
-let client = new MongoClient();
-let database;
-let movie_collection;
-
-async function connect_db() {
-    client = new MongoClient(uri, { useUnifiedTopology: true });
-    await client.connect();
-
-    database = client.db('sample_mflix');
-    movie_collection = database.collection('movies');
-}
-
-connect_db();
+const movie_collection = db.collection('movies');
 
 // define the first route
 router.get("/movie", async function (req, res) {
@@ -47,4 +32,5 @@ router.get("/movie", async function (req, res) {
     }
 });
 
+console.log('Routes set!');
 module.exports = router;
