@@ -8,7 +8,6 @@ const movie_collection = db.collection('movies');
 router.get("/movie", async function (req, res) {
 
     try {
-
         // Query for a movie that has the title 'Back to the Future'
         const query = { genres: "Comedy", poster: { $exists: true }, runtime: 180 };
         const cursor = await movie_collection.aggregate([
