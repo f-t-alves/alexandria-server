@@ -18,8 +18,11 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 //Bind routes
-const tasksRouter = require('./routes/routes');
-app.use('/api', tasksRouter);
+const movie = require('./routes/movie');
+app.use('/api/movie', movie);
+
+const genres = require('./routes/genres');
+app.use('/api/genres', genres);
 
 // use the express-static middleware
 app.use(express.static("public"));

@@ -9,7 +9,7 @@
 <body>
   <h1>🎥 Welcome to Leaflix</h1>
   <p>What will you watch today?</p>
-  <button id="laugh" onclick="run()">😂 Need a Laugh?</button>
+  <button id="laugh" onclick="run2()">😂 Need a Laugh?</button>
   <div id="movie" style="visibility: hidden;">
     <img src="" alt="movie poster">
     <div>
@@ -18,6 +18,12 @@
     </div>
   </div>
   <script type="text/javascript" src="main.js"></script>
+
+  <form id="form" method="POST" onSubmit="postForm()">
+    <label for="genres">Genre</label>
+    <input id="genres" type="text" autocomplete="name" required />
+    <button type="submit">Search</button>
+  </form>
 </body>
 
 </html>

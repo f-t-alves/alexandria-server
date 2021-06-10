@@ -31,25 +31,27 @@ describe('Integration Test', () => {
                 .request(server)
                 .get('/api/movie')
                 .end((err, response) => {
+                    const first = response.body[0];
                     response.should.have.status(200);
-                    response.body.should.be.a('object');
-                    response.body.should.have.property('poster');
-                    response.body.should.have.property('title');
+                    first.should.be.a('object');
+                    first.should.have.property('poster');
+                    first.should.have.property('title');
                     done();
                 })
         }).timeout(5000);
     })
 
     describe('GET test 2', () => {
-        it('Test GET route /api/movie', (done) => {
+        it('Test GET route /api/movie?genre=Comedy', (done) => {
             chai
                 .request(server)
-                .get('/api/movie')
+                .get('/api/movie?genre=Comedy')
                 .end((err, response) => {
                     response.should.have.status(200);
-                    response.body.should.be.a('object');
-                    response.body.should.have.property('poster');
-                    response.body.should.have.property('title');
+                    const first = response.body[0];
+                    first.should.be.a('object');
+                    first.should.have.property('poster');
+                    first.should.have.property('title');
                     done();
                 })
         }).timeout(5000);
