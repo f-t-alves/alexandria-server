@@ -3,6 +3,9 @@ require('dotenv').config();
 const express = require("express");
 const app = express();
 
+const passport = require('passport');
+const bodyParser = require('body-parser');
+
 let cors = require("cors");
 
 const config = require('./utils/constants');
@@ -14,15 +17,27 @@ const corsOptions = {
   credentials: true
 }
 
+require("./utils/auth.js");
+
 //Allow cross-origin
 app.use(cors(corsOptions));
 
+// Activate body parser
+app.use(bodyParser.urlencoded({ extended: false }));
+
 //Bind routes
 const movie = require('./routes/movie');
-app.use('/api/movie', movie);
+app.use('/api', movie);
 
 const genres = require('./routes/genres');
-app.use('/api/genres', genres);
+app.use('/api', genres);
+
+const login = require('./routes/login.js');
+app.use('/api', login);
+
+const profile = require('./routes/profile.js');
+// Plug in the JWT strategy as a middleware so only verified users can access this route.
+app.use('/api', passport.authenticate('jwt', { session: false }), profile);
 
 // use the express-static middleware
 app.use(express.static("public"));

@@ -1,11 +1,11 @@
-let db = require("../utils/database");
+let mongo = require("../utils/database");
 let express = require("express");
 let router = express.Router();
 
-const movie_collection = db.collection("movies");
+const movie_collection = mongo.db.collection("movies");
 
 // define the first route
-router.get("/", async function (req, res) {
+router.get("/genres", async function (req, res) {
   try {
     
     console.log('Genres query!')

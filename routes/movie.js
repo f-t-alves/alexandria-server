@@ -1,18 +1,21 @@
-let db = require("../utils/database");
+let mongo = require("../utils/database");
 let express = require("express");
 let router = express.Router();
 
-const movie_collection = db.collection("movies");
+const movie_collection = mongo.db.collection("movies");
 
 // define the first route
-router.get("/", async function (req, res) {
-
-  console.log("Movie query!")
+router.get("/movie", async function (req, res) {
+  console.log("Movie query!");
 
   try {
     const genre = req.query.genre ? req.query.genre : "Comedy";
     console.log(genre);
-    const query = { genres: genre, poster: { $exists: true }, imdb: { $exists: true}};
+    const query = {
+      genres: genre,
+      poster: { $exists: true },
+      imdb: { $exists: true },
+    };
     const cursor = await movie_collection.aggregate([
       { $match: query },
       { $sample: { size: 4 } },
@@ -21,7 +24,7 @@ router.get("/", async function (req, res) {
           title: 1,
           fullplot: 1,
           poster: 1,
-          imdb: 1
+          imdb: 1,
         },
       },
     ]);
@@ -35,7 +38,7 @@ router.get("/", async function (req, res) {
   }
 });
 
-router.post("/", async function (req, res) {
+router.post("/movie", async function (req, res) {
   const body = req.body;
   console.log("Received Movie API POST!");
   console.log(body);
