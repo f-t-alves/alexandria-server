@@ -2,8 +2,8 @@ const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const UserModel = require("./database.js").models.Users;
 
-const JWTstrategy = require('passport-jwt').Strategy;
-const ExtractJWT = require('passport-jwt').ExtractJwt;
+const JWTstrategy = require("passport-jwt").Strategy;
+const ExtractJWT = require("passport-jwt").ExtractJwt;
 
 const TOP_SECRET = process.env.JWT_TOKEN_SECRET;
 
@@ -56,17 +56,17 @@ passport.use(
 );
 
 passport.use(
-    new JWTstrategy(
-      {
-        secretOrKey: TOP_SECRET,
-        jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
-      },
-      async (token, done) => {
-        try {
-          return done(null, token.user);
-        } catch (error) {
-          done(error);
-        }
+  new JWTstrategy(
+    {
+      secretOrKey: TOP_SECRET,
+      jwtFromRequest: ExtractJWT.fromUrlQueryParameter("secret_token"),
+    },
+    async (token, done) => {
+      try {
+        return done(null, token.user);
+      } catch (error) {
+        done(error);
       }
-    )
-  );
+    }
+  )
+);

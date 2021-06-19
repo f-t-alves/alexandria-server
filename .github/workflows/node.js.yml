@@ -31,3 +31,4 @@ jobs:
 
       env:
         MONGODB_URI: ${{ secrets.MONGODB_URI }}
+        JWT_TOKEN_SECRET: ${{ secrets.JWT_TOKEN_SECRET }}

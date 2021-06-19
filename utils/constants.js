@@ -1,11 +1,16 @@
 const prod = {
     url: {
-        FRONT_URL: "https://alexandria-front.netlify.app"
+        FRONT_URL_WHITELIST: [
+            "https://alexandria-front.netlify.app"
+        ]
     }
 };
 const dev = {
     url: {
-        FRONT_URL: 'http://localhost:3001'
+        FRONT_URL_WHITELIST: [
+            'http://localhost:3001',
+            'https://hoppscotch.io'
+        ]
     }
 };
 console.log('ENV: ', process.env.NODE_ENV)
